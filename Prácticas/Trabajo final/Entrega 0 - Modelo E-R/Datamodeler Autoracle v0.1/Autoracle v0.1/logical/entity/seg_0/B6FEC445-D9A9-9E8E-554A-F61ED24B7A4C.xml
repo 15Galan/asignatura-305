@@ -1,0 +1,118 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="B6FEC445-D9A9-9E8E-554A-F61ED24B7A4C" name="Vehículo">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:48:38 UTC</createdTime>
+<ownerDesignName>Autoracle v0.1</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID" id="BD41C7E2-7A19-8611-E95D-FCCA264B36C0">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:48:54 UTC</createdTime>
+<ownerDesignName>Autoracle v0.1</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Marca" id="F988DD10-75F0-AAC0-DF1C-04CE6066203F">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:49:01 UTC</createdTime>
+<ownerDesignName>Autoracle v0.1</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Modelo" id="E474467F-8214-FD4C-8493-123A3FA69A90">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:49:12 UTC</createdTime>
+<ownerDesignName>Autoracle v0.1</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Puertas" id="22C5DF0E-AAAD-BFAD-5259-2956899E02ED">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:49:16 UTC</createdTime>
+<notes><![CDATA[Lógico (3 / 5).]]></notes>
+<ownerDesignName>Autoracle v0.1</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Combustible" id="987DADEF-F760-4B54-36D0-ED7EA9AE51AB">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:49:20 UTC</createdTime>
+<notes><![CDATA[Lógico (gasolina / diésel / eléctrico / híbrido).]]></notes>
+<ownerDesignName>Autoracle v0.1</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Bastidor" id="F4067586-1226-0081-0420-FF630B181D2E">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:49:31 UTC</createdTime>
+<ownerDesignName>Autoracle v0.1</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Fabricación" id="EBC1D5C2-F0AB-47FF-4073-12690E5AECB1">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:50:19 UTC</createdTime>
+<ownerDesignName>Autoracle v0.1</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DNI" id="89378BB9-91D8-7DA8-D0D7-EB6425D550B3">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:59:13 UTC</createdTime>
+<generatorID>179DF4BA-5C3F-6649-10A4-889CDDC76197</generatorID>
+<ownerDesignName>Autoracle v0.1</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>A7A949AF-E101-4AE8-4F7E-1B2C95DD3DBE</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="8B5C986B-85BE-AEE4-1105-F73529BD7D4D" name="Vehículo PK">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:48:59 UTC</createdTime>
+<ownerDesignName>Autoracle v0.1</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>BD41C7E2-7A19-8611-E95D-FCCA264B36C0</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
