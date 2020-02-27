@@ -1,0 +1,89 @@
+-- Ejercicio 1
+SELECT *
+	FROM dict
+	WHERE table_name = 'ALL_TAB_COLUMNS';
+
+SELECT column_name, data_type
+	FROM all_tab_columns
+	WHERE owner = 'DOCENCIA' AND table_name = 'ALUMNOS';
+
+
+-- Ejercicio 2
+SELECT *
+	FROM dict
+	WHERE table_name = 'USER_OBJECTS';
+
+SELECT object_name, type
+	FROM user_objects;
+
+DESC user_objects;
+
+
+-- Ver todos los usuarios UBD7...
+SELECT *
+	FROM all_users
+	WHERE username LIKE 'UBD7%';
+
+
+-- Cambiar la contraseña
+ALTER USER ubd722 IDENTIFIED BY 'contraseña';		(sin las comillas se pasa automáticamente a mayúsculas)
+
+
+-- Ejercicio 3
+SELECT *
+	FROM user_role_privs;
+
+SELECT *
+	FROM dict
+	WHERE UPPER(comments) LIKE '%ROLE%';
+
+
+-- Ejercicio 4
+SELECT DISTINCT privilege
+	FROM user_sys_privs;
+
+
+-- Algo
+SELECT column_name
+	FROM all_tab_columns
+	WHERE OWNER = 'DOCENCIA' AND table_name = 'PROFESORES';
+
+SELECT constraint_name
+	FROM all_constraints
+	WHERE owner = 'DOCENCIA' AND table_name = 'DEPARTAMENTOS' AND constraint_type = 'P';
+
+SELECT column_name
+	FROM all_constraints ac
+		JOIN all_cons_column acc
+			ON (ac.owner = acc.owner
+				AND ac.table_name = acc.table_name
+				AND ac.constraint_name = acc.constraint_name)
+	WHERE ac.owner = 'DOCENCIA' AND ac.table_name = 'DEPARTAMENTOS';
+
+SELECT *
+	FROM all_constraints
+	WHERE owner = 'DOCENCIA' AND constraint_type = 'R';
+
+
+-- Ejercicio 5
+SELECT constraint_name
+	FROM all_constraints
+	WHERE owner = 'DOCENCIA' AND constraint_type = 'R' AND owner = r_owner;
+
+
+-- Algo
+SELECT *
+	FROM all_synonyms;
+
+SELECT *
+	FROM all_synonyms
+	WHERE table_owner = 'DOCENCIA';
+
+SELECT *
+	FROM all_views
+	WHERE owner = 'DOCENCIA';
+
+-- ¿Dónde ver la fecha de creación de una tabla?
+SELECT created
+	FROM all_objects
+	WHERE owner = 'DOCENCIA' AND table_name = 'PROFESORES';
