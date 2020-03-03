@@ -69,6 +69,18 @@
 <use>0</use>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="ID_Cargo" id="A7108F24-6F3E-3CC3-AF2D-B79B6A613BA2">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 12:27:05 UTC</createdTime>
+<generatorID>B400CEDF-5E01-7A54-E4F0-1D592780C787</generatorID>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<referedAttribute>E56C0CC3-3DCA-32A3-B070-CED760CA9233</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="917EBB78-9E85-BC7C-AB13-B943D9B0B50F" name="Retención PK">

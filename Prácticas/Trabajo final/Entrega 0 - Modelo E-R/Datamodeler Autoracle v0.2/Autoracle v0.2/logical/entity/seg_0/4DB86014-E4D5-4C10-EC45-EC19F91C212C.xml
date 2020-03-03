@@ -16,16 +16,6 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="ID" id="003EFB79-3B05-0CEE-3BB9-0C34E97298E4">
-<createdBy>Usuario</createdBy>
-<createdTime>2020-02-27 17:23:03 UTC</createdTime>
-<ownerDesignName>Autoracle v0.2</ownerDesignName>
-<engineerTo>
-<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
-</engineerTo>
-<use>0</use>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="Num_Servicios" id="4980473E-175C-FF22-CFD5-41C58210ECD9">
 <createdBy>Usuario</createdBy>
 <createdTime>2020-02-27 17:23:18 UTC</createdTime>
@@ -36,19 +26,9 @@
 <use>0</use>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Teléfono" id="26037A2E-3D15-6907-C54E-87D75291D546">
+<Attribute name="Email" id="5C0A3DE9-BB9A-33EB-C638-46F014508AEC">
 <createdBy>Usuario</createdBy>
-<createdTime>2020-02-27 17:23:47 UTC</createdTime>
-<ownerDesignName>Autoracle v0.2</ownerDesignName>
-<engineerTo>
-<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
-</engineerTo>
-<use>0</use>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="Email" id="9F90CC79-C26B-B12F-542A-09AC73888020">
-<createdBy>Usuario</createdBy>
-<createdTime>2020-02-27 17:23:51 UTC</createdTime>
+<createdTime>2020-03-03 13:05:30 UTC</createdTime>
 <ownerDesignName>Autoracle v0.2</ownerDesignName>
 <engineerTo>
 <item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
@@ -66,9 +46,6 @@
 <item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
 </engineerTo>
 <pk>true</pk>
-<usedAttributes>
-<attributeRef>003EFB79-3B05-0CEE-3BB9-0C34E97298E4</attributeRef>
-</usedAttributes>
 </identifier>
 </identifiers>
 </Entity>

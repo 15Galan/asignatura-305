@@ -115,6 +115,18 @@
 <use>0</use>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="ID_Cargo" id="E324757A-CCAD-C2B4-8B5E-A2A22562F002">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 12:27:33 UTC</createdTime>
+<generatorID>59C9D614-EA01-9610-647E-B54CA8FA5DE2</generatorID>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<referedAttribute>E56C0CC3-3DCA-32A3-B070-CED760CA9233</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="A25DE40B-4C25-A0D8-5601-BF44416E0152" name="Empleado PK">
@@ -127,6 +139,18 @@
 <pk>true</pk>
 <usedAttributes>
 <attributeRef>A47164B4-1626-8E78-487D-5143D822E706</attributeRef>
+</usedAttributes>
+</identifier>
+<identifier id="749E870D-2114-90BA-F019-B57A68EBF39D" name="Key_2">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 13:18:21 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<newElementsIDs>911F38CB-F90A-A094-5A3E-39208B0EA474</newElementsIDs>
+<usedAttributes>
+<attributeRef>911F38CB-F90A-A094-5A3E-39208B0EA474</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

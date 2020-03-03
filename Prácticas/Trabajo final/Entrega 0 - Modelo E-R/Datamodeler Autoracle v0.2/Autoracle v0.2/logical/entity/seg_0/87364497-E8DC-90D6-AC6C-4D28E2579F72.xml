@@ -1,0 +1,40 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="87364497-E8DC-90D6-AC6C-4D28E2579F72" name="Reparacion">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 13:14:59 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<hierarchicalParent>CB613CDB-F07C-2376-10D3-0C86511B386F</hierarchicalParent>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Motivo" id="3B7FCDE0-527B-E0C6-06BE-11803938A70D">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 13:15:36 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Categoria" id="D11CEEB8-5F51-B8CA-D1AB-537C68973B9E">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 13:15:30 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+</Entity>

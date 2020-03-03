@@ -25,48 +25,6 @@
 <use>0</use>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="Marca" id="F988DD10-75F0-AAC0-DF1C-04CE6066203F">
-<createdBy>Usuario</createdBy>
-<createdTime>2020-02-27 16:49:01 UTC</createdTime>
-<ownerDesignName>Autoracle v0.2</ownerDesignName>
-<engineerTo>
-<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
-</engineerTo>
-<use>0</use>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="Modelo" id="E474467F-8214-FD4C-8493-123A3FA69A90">
-<createdBy>Usuario</createdBy>
-<createdTime>2020-02-27 16:49:12 UTC</createdTime>
-<ownerDesignName>Autoracle v0.2</ownerDesignName>
-<engineerTo>
-<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
-</engineerTo>
-<use>0</use>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="Puertas" id="22C5DF0E-AAAD-BFAD-5259-2956899E02ED">
-<createdBy>Usuario</createdBy>
-<createdTime>2020-02-27 16:49:16 UTC</createdTime>
-<notes><![CDATA[Lógico (3 / 5).]]></notes>
-<ownerDesignName>Autoracle v0.2</ownerDesignName>
-<engineerTo>
-<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
-</engineerTo>
-<use>0</use>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="Combustible" id="987DADEF-F760-4B54-36D0-ED7EA9AE51AB">
-<createdBy>Usuario</createdBy>
-<createdTime>2020-02-27 16:49:20 UTC</createdTime>
-<notes><![CDATA[Lógico (gasolina / diésel / eléctrico / híbrido).]]></notes>
-<ownerDesignName>Autoracle v0.2</ownerDesignName>
-<engineerTo>
-<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
-</engineerTo>
-<use>0</use>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="Bastidor" id="F4067586-1226-0081-0420-FF630B181D2E">
 <createdBy>Usuario</createdBy>
 <createdTime>2020-02-27 16:49:31 UTC</createdTime>
@@ -84,6 +42,18 @@
 <engineerTo>
 <item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
 </engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID1" id="175D4735-8AAA-234E-D199-2D85D3AEEB4C">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 13:10:30 UTC</createdTime>
+<generatorID>298A45DE-7606-BDAA-C894-A936FF93273B</generatorID>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<referedAttribute>1D025C94-25E8-4AF5-DE14-87D87C4FAFAC</referedAttribute>
 <use>0</use>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>

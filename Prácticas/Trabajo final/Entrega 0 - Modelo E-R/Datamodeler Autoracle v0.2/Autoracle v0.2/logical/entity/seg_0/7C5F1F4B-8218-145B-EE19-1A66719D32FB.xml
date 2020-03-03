@@ -16,29 +16,9 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="ID" id="E91DCF5D-BAE1-A728-C088-786F4A209397">
-<createdBy>Usuario</createdBy>
-<createdTime>2020-03-03 10:57:24 UTC</createdTime>
-<ownerDesignName>Autoracle v0.2</ownerDesignName>
-<engineerTo>
-<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
-</engineerTo>
-<use>0</use>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="Categoria" id="6FBF4B6B-2927-CF3B-D734-AA0873EB1D52">
 <createdBy>Usuario</createdBy>
 <createdTime>2020-03-03 10:57:28 UTC</createdTime>
-<ownerDesignName>Autoracle v0.2</ownerDesignName>
-<engineerTo>
-<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
-</engineerTo>
-<use>0</use>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="Pieza" id="79B5E78E-E285-895F-9873-133E7818BA51">
-<createdBy>Usuario</createdBy>
-<createdTime>2020-03-03 10:57:36 UTC</createdTime>
 <ownerDesignName>Autoracle v0.2</ownerDesignName>
 <engineerTo>
 <item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
@@ -66,9 +46,6 @@
 <item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
 </engineerTo>
 <pk>true</pk>
-<usedAttributes>
-<attributeRef>E91DCF5D-BAE1-A728-C088-786F4A209397</attributeRef>
-</usedAttributes>
 </identifier>
 </identifiers>
 </Entity>
