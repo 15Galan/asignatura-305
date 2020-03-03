@@ -1,0 +1,64 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="A46B4723-E179-3433-895D-7BD56AE28A3C" name="Reparacion">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 10:56:19 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<hierarchicalParent>CB613CDB-F07C-2376-10D3-0C86511B386F</hierarchicalParent>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID" id="4446FEFB-F044-9507-42C5-108581AC3D53">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 10:56:42 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Horas_Mano_Obra" id="D1345862-8A0A-F77F-7E1D-EB8A5381A97A">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 10:56:52 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Piezas" id="4CF70556-0F80-EF78-6C31-373C61AE8369">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 10:56:59 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="AC11A4C6-042A-2102-A9CC-B67A4889B657" name="Reparacion PK">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 10:56:44 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>4446FEFB-F044-9507-42C5-108581AC3D53</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

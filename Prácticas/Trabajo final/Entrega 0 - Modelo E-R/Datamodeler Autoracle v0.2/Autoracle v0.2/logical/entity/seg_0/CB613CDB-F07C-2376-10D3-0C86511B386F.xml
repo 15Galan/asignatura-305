@@ -1,0 +1,95 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="CB613CDB-F07C-2376-10D3-0C86511B386F" name="Servicio">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 10:53:22 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID" id="73DFD5B1-7A6E-26A1-945A-56546BDE9D74">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 10:53:31 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Tipo" id="E18235B8-2CDD-88FF-62B3-819BD43D9B07">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 10:53:36 UTC</createdTime>
+<notes><![CDATA[Mantenimiento / Reparación]]></notes>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Observaciones" id="71F78AE3-D641-09B9-0D80-F2C3831E1C65">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 10:55:01 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Precio" id="546F8998-E6E3-8C35-8E5A-6D1A3A81FFC1">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 10:58:46 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Fecha_Entrada" id="D2076F20-130D-81FC-EB8C-63A6B5068211">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 11:03:40 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Fecha_Apertura" id="7A35B0B4-D595-12CA-F8DE-5CAD11682EAB">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 11:03:46 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="D8D2C973-9ACF-1607-177F-DAD3C3953F31" name="Servicio PK">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 10:53:35 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>73DFD5B1-7A6E-26A1-945A-56546BDE9D74</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="Autoracle v0.2" id="8C7CB390-5C61-4F55-62E5-D49A30118832" version="3.5">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:39:27 UTC</createdTime>
+<ownerDesignName>Autoracle v0.1</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>8C7CB390-5C61-4F55-62E5-D49A30118832</designId>
+</OSDM_Design>

@@ -1,0 +1,103 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="464344CF-6C40-A93D-4EFD-556587FB6192" name="Historial">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 17:01:15 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID_Cliente" id="B7AAB588-4CB7-14A7-6995-FC600B45CB7F">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 17:01:40 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_Vehiculo" id="8BB80F5A-95DB-517C-9201-7C6B9A667B3A">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 17:01:31 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Servicio" id="1749910E-E6DB-6D2C-2D15-308DE1141461">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 17:01:47 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DNI" id="036D8D57-AC71-C1C2-BD94-5878A29D826A">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 11:00:15 UTC</createdTime>
+<generatorID>0FDB6ED4-E7B2-752F-358A-DC0B082681E9</generatorID>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<referedAttribute>A7A949AF-E101-4AE8-4F7E-1B2C95DD3DBE</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID" id="DB4D78B0-FDE5-7FCF-A7CC-36AEF67A9D00">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 11:00:23 UTC</createdTime>
+<generatorID>4D765E6C-50FE-4AEE-14AF-4ED1B3A306EA</generatorID>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<referedAttribute>BD41C7E2-7A19-8611-E95D-FCCA264B36C0</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID1" id="BA08AF90-BE84-CBB4-68FC-D96B6B3AB4B8">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 11:00:27 UTC</createdTime>
+<generatorID>0D9B2319-4D03-1FE6-3FF1-E4FFEB62B0C3</generatorID>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<referedAttribute>73DFD5B1-7A6E-26A1-945A-56546BDE9D74</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="E0528AAF-6655-40ED-A119-08D285D131EC" name="Historial PK">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 17:02:33 UTC</createdTime>
+<ownerDesignName>Autoracle v0.2</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>8BB80F5A-95DB-517C-9201-7C6B9A667B3A</attributeRef>
+<attributeRef>B7AAB588-4CB7-14A7-6995-FC600B45CB7F</attributeRef>
+<attributeRef>036D8D57-AC71-C1C2-BD94-5878A29D826A</attributeRef>
+<attributeRef>DB4D78B0-FDE5-7FCF-A7CC-36AEF67A9D00</attributeRef>
+<attributeRef>BA08AF90-BE84-CBB4-68FC-D96B6B3AB4B8</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

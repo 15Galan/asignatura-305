@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="1E2546BD-396A-73B4-DCA6-23DC50701C64" mainViewID="A1CBDE62-32EE-DD89-86D9-584BD8A646A2">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:39:27 UTC</createdTime>
+<ownerDesignName>Autoracle v0.1</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>
