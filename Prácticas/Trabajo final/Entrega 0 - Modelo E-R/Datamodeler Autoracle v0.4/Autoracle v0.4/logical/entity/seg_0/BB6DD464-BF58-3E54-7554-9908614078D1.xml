@@ -1,0 +1,65 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="BB6DD464-BF58-3E54-7554-9908614078D1" name="Pedido">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-05 16:15:04 UTC</createdTime>
+<ownerDesignName>Autoracle v0.4</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID" id="4F87CA4E-D55B-A688-BB4D-5CF41B3682AC">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-05 16:15:09 UTC</createdTime>
+<ownerDesignName>Autoracle v0.4</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Total" id="94C02388-2B50-8F98-66C2-C70587C49E4B">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-05 16:15:14 UTC</createdTime>
+<ownerDesignName>Autoracle v0.4</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID1" id="EB055B67-02F1-72FA-6340-752E468C643E">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-05 16:18:42 UTC</createdTime>
+<generatorID>5DD76532-479A-B534-0D2C-F1106D71C613</generatorID>
+<ownerDesignName>Autoracle v0.4</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<referedAttribute>E6BC5F7D-C8A3-0748-A120-CFF5A0267D9A</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="43D5297E-8B3D-1B54-76FA-83D123E5A0B1" name="Pedido PK">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-05 16:15:12 UTC</createdTime>
+<ownerDesignName>Autoracle v0.4</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>4F87CA4E-D55B-A688-BB4D-5CF41B3682AC</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
