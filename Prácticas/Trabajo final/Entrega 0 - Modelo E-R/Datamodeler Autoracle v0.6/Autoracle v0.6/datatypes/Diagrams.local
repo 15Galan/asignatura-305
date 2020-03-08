@@ -1,4 +1,4 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <oracle.dbtools.crest.model.design.datatypes.DataTypesDesign>
-   <object objectType="main_view" objectID="61A00509-6690-93C6-B055-D80564162AF1" name="" visible="false"/>
+   <object objectType="main_view" objectID="61A00509-6690-93C6-B055-D80564162AF1" name="DataTypes" visible="false"/>
 </oracle.dbtools.crest.model.design.datatypes.DataTypesDesign>
