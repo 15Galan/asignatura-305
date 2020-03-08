@@ -1,0 +1,108 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="704812B8-FFD3-9FCC-7283-0E5622AB75C7" name="Pieza">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:45:59 UTC</createdTime>
+<ownerDesignName>Autoracle v0.5</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID_Referencia" id="4B03819A-B1D1-0C4B-781F-D4014B2F6045">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:46:13 UTC</createdTime>
+<ownerDesignName>Autoracle v0.5</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nombre" id="252CBE41-FF93-681E-1E44-711570B42528">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:46:29 UTC</createdTime>
+<ownerDesignName>Autoracle v0.5</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Precio" id="55AE72C1-695C-3A4A-463A-C44E2B8F9924">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:47:29 UTC</createdTime>
+<ownerDesignName>Autoracle v0.5</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Categoria" id="32B798CB-949E-736F-02D5-7A516FB39235">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:48:00 UTC</createdTime>
+<ownerDesignName>Autoracle v0.5</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Fecha_Caducidad" id="F9C3351B-6EE4-A944-05C9-10D04983812B">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:48:11 UTC</createdTime>
+<ownerDesignName>Autoracle v0.5</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID" id="8F6F5EA3-A918-784E-857E-B169AB5963EB">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 12:48:13 UTC</createdTime>
+<generatorID>7D76D887-8657-4C3B-B123-04F2894AFDDD</generatorID>
+<ownerDesignName>Autoracle v0.5</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<referedAttribute>E6BC5F7D-C8A3-0748-A120-CFF5A0267D9A</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID_Referencia1" id="351A8FD5-5996-3673-E79F-D1B8E3F134ED">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 17:33:04 UTC</createdTime>
+<generatorID>4D3716E6-E9D9-4F85-36A9-93A4BE47CA38</generatorID>
+<ownerDesignName>Autoracle v0.5</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<referedAttribute>86A73F41-76CF-2C39-BB95-1C8EA5ADB7CB</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="BB9C8197-986F-9904-6262-54F35C3CB0BB" name="Pieza PK">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 16:46:24 UTC</createdTime>
+<ownerDesignName>Autoracle v0.5</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>4B03819A-B1D1-0C4B-781F-D4014B2F6045</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

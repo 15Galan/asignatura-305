@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_16" directorySegmentName="seg_0" id="7D76D887-8657-4C3B-B123-04F2894AFDDD">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 12:48:13 UTC</createdTime>
+<ownerDesignName>Autoracle v0.5</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<sourcePk>0ACB6EF9-AE4E-E535-749B-BAAA634585D2</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>Almacena</nameOnSource>
+<nameOnTarget>Es almacenada</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>DDC3A845-4441-C3B7-DF2F-757020264AEE</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>704812B8-FFD3-9FCC-7283-0E5622AB75C7</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
