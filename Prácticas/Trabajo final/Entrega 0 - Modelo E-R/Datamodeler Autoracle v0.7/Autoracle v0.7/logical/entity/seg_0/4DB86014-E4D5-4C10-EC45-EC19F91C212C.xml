@@ -1,0 +1,51 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="4DB86014-E4D5-4C10-EC45-EC19F91C212C" name="Cliente Fidelizado">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 17:22:52 UTC</createdTime>
+<ownerDesignName>Autoracle v0.7</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<hierarchicalParent>598D7423-787D-53EB-3936-55C832499D21</hierarchicalParent>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Num_Servicios" id="4980473E-175C-FF22-CFD5-41C58210ECD9">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 17:23:18 UTC</createdTime>
+<ownerDesignName>Autoracle v0.7</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Email" id="5C0A3DE9-BB9A-33EB-C638-46F014508AEC">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-03-03 13:05:30 UTC</createdTime>
+<ownerDesignName>Autoracle v0.7</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="DDBA402B-C844-A923-91BA-0C71BE86F1AB" name="Entity_13 PK">
+<createdBy>Usuario</createdBy>
+<createdTime>2020-02-27 17:23:58 UTC</createdTime>
+<ownerDesignName>Autoracle v0.7</ownerDesignName>
+<engineerTo>
+<item key="87E93ECA-9364-E47C-021A-380F23D03A80" value="true"/>
+</engineerTo>
+<pk>true</pk>
+</identifier>
+</identifiers>
+</Entity>
