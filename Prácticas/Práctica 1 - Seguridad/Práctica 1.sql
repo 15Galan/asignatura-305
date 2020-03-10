@@ -1,0 +1,124 @@
+-- Paso #3
+SELECT *
+    FROM user_tablespaces
+        WHERE tablespace_name LIKE 'TS_AUTORACLE';
+
+
+CREATE TABLESPACE TS_AUTORACLE
+    DATAFILE 'autoracle.dbf'
+    SIZE 10M
+    AUTOEXTEND ON;
+
+
+-- Paso #4
+CREATE PROFILE PERF_ADMINISTRATIVO
+    LIMIT SESSIONS_PER_USER 3
+    IDLE_TIME 5;
+
+
+-- Paso #5
+CREATE PROFILE PERF_EMPLEADO
+    LIMIT SESSIONS_PER_USER 4
+    PASSWORD_LIFE_TIME 30;
+
+
+-- Paso #7
+CREATE ROLE R_ADMINISTRATIVO_SUPER;
+
+GRANT CONNECT, CREATE TABLE
+    TO R_ADMINISTRATIVO_SUPER;
+
+
+--Paso #8
+CREATE USER USUARIO1
+    IDENTIFIED BY usuario
+    DEFAULT TABLESPACE TS_AUTORACLE
+    QUOTA 1M ON TS_AUTORACLE
+    PROFILE PERF_ADMINISTRATIVO;
+    
+CREATE USER USUARIO2
+    IDENTIFIED BY usuario
+    DEFAULT TABLESPACE TS_AUTORACLE
+    QUOTA 1M ON TS_AUTORACLE
+    PROFILE PERF_ADMINISTRATIVO;
+
+GRANT R_ADMINISTRATIVO_SUPER
+    TO USUARIO1, USUARIO2;
+
+
+-- Paso #9
+CREATE TABLE USUARIO1.TABLA2 (CODIGO NUMBER);
+CREATE TABLE USUARIO2.TABLA2 (CODIGO NUMBER);
+
+
+-- Paso #10
+CREATE OR REPLACE
+    PROCEDURE USUARIO1.PR_INSERTA_TABLA2 (P_CODIGO IN NUMBER) AS
+    BEGIN
+        INSERT INTO USUARIO1.TABLA2
+            VALUES (P_CODIGO);
+    END PR_INSERTA_TABLA2;
+    
+    -- DROP PROCEDURE PR_INSERTA_TABLA2;
+/
+
+-- Paso #11
+    -- Funciona.
+
+-- Paso #12
+    -- REVOKE EXECUTE ANY PROCEDURE
+    --    FROM USUARIO2;
+    
+GRANT EXECUTE ON USUARIO1.PR_INSERTA_TABLA2
+    TO USUARIO2;
+
+
+-- Paso #13
+    -- Usando 'exec usuario1.pr_inserta_tabla2(param)' sí.
+
+
+-- Paso #14
+    -- En la tabla del usaurio1, porque el procedimiento funciona
+    -- sobre su tabla, solo que es ejecutado por otro usuario.
+
+
+-- Paso #15
+CREATE OR REPLACE
+    PROCEDURE USUARIO1.PR_INSERTA_TABLA2 (P_CODIGO IN NUMBER) AS
+    BEGIN
+        EXECUTE IMMEDIATE 'INSERT INTO TABLA2 VALUES ('||P_CODIGO||')';
+    END PR_INSERTA_TABLA2;
+/
+
+-- Paso #16
+    -- Funciona.
+
+
+-- Paso #17
+    -- No funciona.
+
+
+-- Paso #18
+CREATE OR REPLACE
+    PROCEDURE USUARIO1.PR_CREA_TABLA (P_TABLA IN VARCHAR2, P_ATRIBUTO IN VARCHAR2) AS
+    BEGIN
+        EXECUTE IMMEDIATE 'CREATE TABLE '||P_TABLA||'('||P_ATRIBUTO||' NUMBER(9))';
+    END PR_CREA_TABLA;
+/
+
+-- Paso #19
+    -- No, porque los permisos que utiliza el procedimiento (CREATE TABLE)
+    -- deben haberse otorgado explícitamente al usuario (en este caso no: rol).
+
+-- Paso #20
+GRANT CREATE TABLE
+    TO USUARIO1;
+    
+GRANT CREATE TABLE
+    TO USUARIO2;
+    
+GRANT EXECUTE ON USUARIO1.PR_INSERTA_TABLA2
+    TO USUARIO2;
+
+-- Paso #21
+    -- Sí.
