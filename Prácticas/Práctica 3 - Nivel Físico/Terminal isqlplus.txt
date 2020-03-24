@@ -1,0 +1,145 @@
+Microsoft Windows [Versión 10.0.18363.693]
+
+(c) 2019 Microsoft Corporation. Todos los derechos reservados.
+
+
+
+C:\Users\Usuario_UMA>sqlplus sys as sysdba
+
+
+
+SQL*Plus: Release 18.0.0.0.0 - Production on Mar Mar 24 12:59:58 2020
+
+Version 18.3.0.0.0
+
+
+
+Copyright (c) 1982, 2018, Oracle.  All rights reserved.
+
+
+
+Introduzca la contrase±a:
+
+
+
+Conectado a:
+
+Oracle Database 18c Enterprise Edition Release 18.0.0.0.0 - Production
+
+Version 18.3.0.0.0
+
+
+
+SQL> SHUTDOWN IMMEDIATE;
+
+Base de datos cerrada.
+
+Base de datos desmontada.
+
+Instancia ORACLE cerrada.
+
+SQL> startup nomount
+
+Instancia ORACLE iniciada.
+
+
+
+Total System Global Area  629144120 bytes
+
+Fixed Size                  8792632 bytes
+
+Variable Size             511705088 bytes
+
+Database Buffers          100663296 bytes
+
+Redo Buffers                7983104 bytes
+
+SQL> ALTER DATABASE MOUNT;
+
+
+
+Base de datos modificada.
+
+
+
+SQL> ALTER DATABASE OPEN;
+
+
+
+Base de datos modificada.
+
+
+
+SQL> CREATE pfile FROM spfile;
+
+
+
+Archivo creado.
+
+
+
+SQL> SHUTDOWN IMMEDIATE;
+
+Base de datos cerrada.
+
+Base de datos desmontada.
+
+Instancia ORACLE cerrada.
+
+SQL> startup pfile='C:\Users\app\alumnos\Oracle_instalacion\database\INITORCL.ORA'
+
+Instancia ORACLE iniciada.
+
+
+
+Total System Global Area  473953088 bytes
+
+Fixed Size                  8790848 bytes
+
+Variable Size             377487360 bytes
+
+Database Buffers           79691776 bytes
+
+Redo Buffers                7983104 bytes
+
+Base de datos montada.
+
+Base de datos abierta.
+
+SQL> CREATE spfile FROM pfile;
+
+
+
+Archivo creado.
+
+
+
+SQL> SHUTDOWN IMMEDIATE;
+
+Base de datos cerrada.
+
+Base de datos desmontada.
+
+Instancia ORACLE cerrada.
+
+SQL> startup nomount
+
+Instancia ORACLE iniciada.
+
+
+
+Total System Global Area  473953088 bytes
+
+Fixed Size                  8790848 bytes
+
+Variable Size             377487360 bytes
+
+Database Buffers           79691776 bytes
+
+Redo Buffers                7983104 bytes
+
+SQL>
+
+
+
+Respecto al último paso, como se puede apreciar, el total de SGA ha cambiado correctamente.
