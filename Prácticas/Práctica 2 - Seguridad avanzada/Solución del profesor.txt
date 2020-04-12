@@ -1,0 +1,215 @@
+--1
+--Conéctate a la base de datos como system.
+
+
+--2
+--Ejecuta todos los pasos necesarios para crear un wallet de tipo FILE tal y como hemos visto en clase para permitir implementar TDE (Transparent Data Encryption) sobre columnas de las tablas que seleccionemos.
+ALTER SYSTEM SET "WALLET_ROOT"='C:\wallet' scope=SPFILE;
+--Establecer el directorio dónde se va a almacenar el keystore
+-- IMPORTANTE: El path utilizado deber existir (sino, crearlo) y ser accesible por el servicio de Oracle (el servicio debe tener permisos). Depende de cada instalación. Por ejemplo: C:\Users\alumnos\Oracle\wallet en las máquinas virtuales de este curso.
+-- Como se trata de un parámetro estático tendremos que reiniciar la instancia. La forma más rápida será reiniciar el servicio de Windows (OracleServiceORCL).
+SHOW PARAMETER WALLET_ROOT;
+
+ALTER SYSTEM SET TDE_CONFIGURATION="KEYSTORE_CONFIGURATION=FILE" scope=both;
+-- Establecer el tipo de Keystore que vamos a utilizar
+
+--Desde un terminal ejecutar:
+Sqlplus / as syskm
+--Habremos entonces entrado con ese privilegio de administración y podemos ya ejecutar todas las órdenes de administración de claves.
+ADMINISTER KEY MANAGEMENT CREATE KEYSTORE IDENTIFIED BY password --Creamos primero un password protected software keystore.
+ADMINISTER KEY MANAGEMENT CREATE AUTO_LOGIN KEYSTORE FROM KEYSTORE IDENTIFIED BY password; --pasamos a autologin dicho keystore
+ADMINISTER KEY MANAGEMENT SET KEY identified by password with backup; --Creamos la Master key
+--Sólo si hay algún problema al ejecutar la última orden, cerrar y abrir el keystore antes de volver a probar:
+--ADMINISTER KEY MANAGEMENT SET KEYSTORE close;
+--ADMINISTER KEY MANAGEMENT SET KEYSTORE open IDENTIFIED BY password;
+--ADMINISTER KEY MANAGEMENT SET KEY identified by password with backup;
+
+
+--3
+--Todo el trabajo de tu proyecto debería estar en un espacio de tablas aparte. En el peor de los casos puede estar en el tablespace USERS. Asumiremos en adelante que usamos el esquema en el que estás desarrollando tu proyecto (si no lo es, no pasa nada, utiliza tu propio nombre). Más adelante, se volcará lo aquí aprendido al esquema final de AUTORACLE. 
+create tablespace TS_AUTORACLE datafile 'C:\tablespace\autooracle.dbf' size 10M;
+
+
+--4
+--Usar una o varias tablas susceptible de precisar que sus datos estén cifrados (ver enunciado del trabajo en grupo). Si no tuvieras nada creado en el momento de la realización de esta práctica, puedes crearte un par de tablas donde una de ellas fueran, por ejemplo, los empleados. Y, por supuesto, introducir algunos datos de ejemplo.
+create user USUARIO1 identified by usuario
+default tablespace TS_AUTORACLE
+quota 1M on TS_AUTORACLE;
+
+grant connect, create table to USUARIO1;
+
+CREATE TABLE USUARIO1.employee (
+	first_name VARCHAR2(128),
+	last_name VARCHAR2(128),
+	empID NUMBER,
+	salary NUMBER(6)
+);
+
+
+--5
+--Parece obvio que en la tabla empleados habrá una serie de columnas que almacenan información sensible. Identifícalas y haz que estén siempre cifradas en disco. ASEGURATE QUE HAYA AL MENOS UNA COLUMNA DE TEXTO NO CIFRADA Y OTRA CIFRADA con objeto de poder hacer comprobaciones en los siguientes pasos.
+ALTER TABLE USUARIO1.employee MODIFY (empID ENCRYPT);
+ALTER TABLE USUARIO1.employee MODIFY (salary ENCRYPT);
+ALTER TABLE USUARIO1.employee MODIFY (first_name ENCRYPT);
+
+
+--6
+--Una vez lo hayas hecho, comprueba que los cambios son efectivos mediante la consulta de la vista del diccionario de datos adecuada.
+select * from dba_encrypted_columns;
+
+
+--7
+--Prueba a insertar varias filas en la tabla de empleados (y en todas aquellas tablas que sea necesario). A continuación, puedes forzar a Oracle a que haga un flush de todos los buffers a disco mediante la instrucción:
+insert into usuario1.employee values('ana','florido',1,1250);
+insert into usuario1.employee values('maria','miguel',2,2125);
+insert into usuario1.employee values('pepe','perez',3,985);
+alter system flush buffer_cache;
+
+--Comprueba a continuación el contenido del fichero que contiene el tablespace con estos datos. La manera más cómoda es utilizar una herramienta que extraiga los strings legibles. E.g.: https://docs.microsoft.com/en-us/sysinternals/downloads/strings
+--Si el fichero no es muy grande también se puede utilizar un editor (e.g. notepad) de texto para abrirlo y realizar búsquedas. Responde a las siguientes preguntas: ¿Se pueden apreciar en el fichero los datos escritos? ¿Por qué?
+--Sólo se aprecian aquellos que no están encriptados y esto se debe a TDE (Transparent Data Encryption).
+
+
+--8
+--Vamos ahora a aplicar políticas de autorización más concretas mediante VPD (Virtual Private Database). 
+--Supongamos que deseamos controlar el acceso a los datos de los empleados. Cuando un usuario con permiso de lectura sobre la tabla empleado acceda,sólo tendrá disponibles sus datos (excepto si se trata de un usuario que haya accedido como SYSDBA (privilegio de administración)).
+--Para ello, necesitaremos primero una función que forme los predicados de la cláusula WHERE. La crearemos en el esquema en el que se encuentran las tablas.
+create or replace function USUARIO1.sec_function(p_schema varchar2, p_obj varchar2)
+  Return varchar2
+is
+  user VARCHAR2(100);
+Begin
+if (SYS_CONTEXT('USERENV', 'ISDBA')='TRUE') 
+then return ''; -- Si el usuario se conecta como sysdba, podrá ver toda la tabla.
+else
+  user := SYS_CONTEXT('userenv', 'SESSION_USER');
+  return 'UPPER(USER_NAME) = ''' || user || '''';
+end if;
+End;
+/
+
+-- userenv = El contexto de aplicación
+-- p_obj es el nombre de la tabla o vista al cual se le aplicará la política
+-- p_schema es el schema en el que se encuentra dicha tabla o vista.
+
+
+--9
+--Debemos añadir una columna (user_name) a la tabla de empleados en la que almacenamos el username de conexión.
+ALTER TABLE USUARIO1.employee ADD (user_name VARCHAR2(200));
+UPDATE USUARIO1.EMPLOYEE SET USER_NAME=FIRST_NAME; --Por ejemplo, ponemos como user_name el first_name
+
+
+--10
+--Crearemos un usuario de forma que podamos probar la política. Añadiremos la política a la tabla empleados (desde un usuario con el role de DBA). Comprobaremos, ANTES de añadir la política, que ese usuario, al conectarse, puede ver todos los datos de la tabla empleados. Y después comprobaremos que ocurre después de añadir la política.
+create user pepe identified by pepe
+default tablespace TS_AUTORACLE
+quota 1M on TS_AUTORACLE;
+
+GRANT CONNECT TO PEPE;
+GRANT SELECT ON USUARIO1.EMPLOYEE TO PEPE;
+SELECT * FROM USUARIO1.EMPLOYEE; --ejecutar esto iniciando sesión como pepe: se muestran todas las filas de la tabla
+
+begin
+ dbms_rls.add_policy
+  (object_schema=>'USUARIO1',
+   object_name=>'EMPLOYEE',
+   policy_name=>'EMP_POLICY',
+   function_schema=>'USUARIO1',
+   policy_function=>'SEC_FUNCTION');
+end;
+/
+
+SELECT * FROM USUARIO1.EMPLOYEE; --ejecutar esto iniciando sesión como pepe: sólo se muestra un registro
+
+--Si en algún momento necesitas desactivar la política puedes usar:
+/*
+begin
+DBMS_RLS.ENABLE_POLICY (
+   object_schema=>'el_nombre_de_tu_esquema',
+   object_name=>'el_nombre_de_tu_tabla',
+   policy_name=>'nombre_politica',
+   enable=>false);
+end;
+/
+*/
+
+
+--11
+--Proporcionemos los permisos necesarios a ese nuevo usuario que acabamos de crear para las pruebas para que, por lo menos, pueda consultar y actualizar datos en la tabla
+grant select on USUARIO1.employee to PEPE;
+grant update on USUARIO1.employee to PEPE;
+
+
+--12
+--¿Qué ocurre cuando nos conectamos desde un usuario existente en la tabla empleados y realizamos un select de todo?
+--Que sólo muestra los datos de ese empleado y de ningún otro.
+
+
+--13
+--¿Y si realizamos un update?
+--Sólo se realiza sobre sus datos.
+
+
+--14
+--¿Podemos hacer update de cualquier columna? ¿Tiene sentido que se pueda?  Prueba a hacer un update de la columna user_name. ¿Qué ocurre? ¿Es el comportamiento esperado por parte del usuario?
+--Sí. Tiene sentido excepto si se modifica la columna user_name, porque el usuario verá como desaparece la única fila que veía de la tabla como consecuencia de un update, y aunque desde el punto de vista de la política aplicada es correcto, desde el punto de vista de DML NO lo es.
+
+
+--15
+--En caso negativo, ¿Como podemos evitarlo?
+--Utilizando el parámetro update_check al añadir la política. Puede probarse su efecto haciendo un drop de la política y volviendola a añadir con el parámetro a true.
+
+--Prúebalo (tip: es posible que tengas que hacer un drop de la politica antes de volver a crearla). Para ello utiliza:
+/*
+begin dbms_rls.drop_policy (
+   object_schema=>'tu_esquema',
+   object_name=>'tu_tabla',
+   policy_name=>'el_nombre_de_la_politica'
+   );
+end;
+/
+*/
+    
+
+--16
+--También podemos aplicar políticas sobre columnas, en lugar de sobre vistas o tablas enteras.
+--Continuando con nuestro ejemplo de los empleados, imaginemos que queremos permitir a los usuarios consultar todos los datos de la tabla excepto cuando también se solicita una columna (ej. salario), en cuyo caso queremos que se muestren sólo los datos del usuario.
+--Para ello crearemos la siguiente función:
+create or replace function USUARIO1.sec_function_salary(p_schema varchar2, p_obj varchar2)
+  Return varchar2
+is
+  user VARCHAR2(100);
+Begin
+  user := SYS_CONTEXT('userenv', 'SESSION_USER');
+  return 'UPPER(USER_NAME) = ''' || user || '''';
+End;
+/
+
+
+--17
+--Investiga en la documentación la función que utilizamos para añadir una política nueva (dbms_rls.add_policy).
+--¿Qué cambios deberíamos hacer para lograr nuestro objetivo?
+--Tip: Desactiva previamente la política anterior para no tener conflictos en los resultados. 
+begin
+DBMS_RLS.ENABLE_POLICY (
+   object_schema=>'usuario1',
+   object_name=>'employee',
+   policy_name=>'EMP_POLICY',
+   enable=>false);
+end;
+/
+
+begin dbms_rls.add_policy (
+   object_schema => 'USUARIO1', 
+   object_name => 'employee', 
+   policy_name => 'SalaryPolicy', 
+   function_schema => 'USUARIO1', 
+   policy_function => 'sec_function_salary', 
+   sec_relevant_cols => 'SALARY');
+end;
+/
+
+
+--18
+--Qué desventajas pueden llegar a tener este tipo de control de acceso más específico? Si no encuentras la respuesta discútelo con el profesor. 
+--Las consultas de agregados se realizan sobre datos no completos, produciendo una impresión del resultado incorrecta.
