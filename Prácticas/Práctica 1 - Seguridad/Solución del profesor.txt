@@ -1,0 +1,222 @@
+--1
+--Conéctate a la base de datos como system
+
+
+--2
+--Si tienes un problema de caducidad del password, utiliza el comando password  (Se aconseja actualizar la contraseña sin cambiarla, para no tener problemas posteriormente de olvido).
+password
+
+
+--3
+--Comprueba que existe un tablespace denominado TS_AUTORACLE. Si no es así, créalo donde quieras. Que sea de 10M con el nombre de fichero de datos que quieras y autoextensible.
+select * from dba_tablespaces;
+create tablespace TS_AUTORACLE datafile 'C:\Users\alumnos\Oracle\oradata\ORCL\autooracle.dbf' size 10M;
+
+
+--4
+--Crea un perfil denominado PERF_ADMINISTRATIVO con 3 intentos para bloquear la cuenta y que se desconecte despu�s de 5 minutos de inactividad
+create profile PERF_ADMINISTRATIVO limit 
+failed_login_attempts 3
+idle_time 5;
+
+
+--5
+--Crea un perfil denominado PERF_EMPLEADO con 4 sesiones por usuario y con una password que caduca cada 30 días. Asegúrate de que las limitaciones de recursos serán efectivas sin problemas.
+create profile PERF_EMPLEADO limit 
+SESSIONS_PER_USER 4
+PASSWORD_LIFE_TIME 30;
+
+select * FROM DBA_PROFILES;
+
+
+--6 
+--Asegúrate de que las limitaciones de recursos serán efectivas sin problemas.
+show parameter resource_limit;
+--Si fuera false, como es el caso de versiones anteriores de Oracle, habría de emitirse la orden:
+--alter system set resource_limit=true;
+
+
+--7
+--Crea un ROLE R_ADMINISTRADOR_SUPER con permiso para conectarse y crear tablas.
+create role R_ADMINISTRADOR_SUPER;
+grant connect, create table to R_ADMINISTRADOR_SUPER;
+
+
+--8
+--Crea dos usuarios denominados USUARIO1 y USUARIO2 con perfil perf_administrativo y contraseña usuario.
+--Otórgales el ROLE R_ADMINISTRADOR_SUPER. Asígneles Quota de 1 MB en el tablespace TS_AUTORACLE.
+--Haga que este sea un tablespace por defecto
+create user USUARIO1 identified by usuario profile PERF_ADMINISTRATIVO
+default tablespace TS_AUTORACLE
+quota 1M on TS_AUTORACLE;
+
+create user USUARIO2 identified by usuario profile PERF_ADMINISTRATIVO
+default tablespace TS_AUTORACLE
+quota 1M on TS_AUTORACLE;
+GRANT R_ADMINISTRADOR_SUPER TO USUARIO1, USUARIO2;
+
+
+--9
+/*
+En ambos usuarios crear la tabla TABLA2:
+CREATE TABLE TABLA2
+ (  CODIGO NUMBER   ) ;
+*/
+CREATE TABLE USUARIO1.TABLA2
+ (  CODIGO NUMBER   ) ;
+CREATE TABLE USUARIO2.TABLA2
+ (  CODIGO NUMBER   ) ;
+
+ 
+--10
+/*Crea el procedimiento PR_INSERTA_TABLA2.
+CREATE OR REPLACE PROCEDURE PR_INSERTA_TABLA2 (
+                                P_CODIGO IN NUMBER) AS
+BEGIN
+     INSERT INTO TABLA2 VALUES (P_CODIGO);
+END PR_INSERTA_TABLA2;
+/
+*/
+CREATE OR REPLACE PROCEDURE USUARIO1.PR_INSERTA_TABLA2 (
+                                P_CODIGO IN NUMBER) AS
+BEGIN
+     INSERT INTO TABLA2 VALUES (P_CODIGO);
+END PR_INSERTA_TABLA2;
+/
+
+
+--11
+--Conéctate como USUARIO1 y Ejecútalo. ¿Funciona? (Se aconseja hacerlo desde SPL Plus). Utiliza la instrucción exec nombre_procedimiento(param).
+exec pr_inserta_tabla2(1);
+select * from tabla2;
+/*
+CODIGO
+------
+     1
+*/
+    
+    
+--12
+--Otórgale permisos a USUARIO2 para ejecutarlo
+grant execute on pr_inserta_tabla2 to usuario2;
+
+
+--13
+--Conéctate como USUARIO2 y Ejecétalo. ¿Funciona?
+connect usuario2;
+exec usuario1.pr_inserta_tabla2(1);
+--Sí funciona. El motivo es que al dar permiso de ejecución sobre el procedimiento damos de forma implícita permiso para la realización de las acciones que éste realiza (si no se trata de instrucciones DDL)
+
+
+--14
+--En este último caso ¿dónde se inserta el dato en la tabla de USUARIO1 o en la de USUARIO2? ¿Por qué?
+--Claramente en la tabla de usuario1, porque es la que se utiliza en el procedimiento.
+
+
+--15
+--Cambiar el procedimiento para que el INSERT lo haga desde un EXECUTE IMMEDIATE. Utiliza execute immediate 'INSERT INTO TABLA2 VALUES ('||P_CODIGO||')';
+CREATE OR REPLACE PROCEDURE USUARIO1.PR_INSERTA_TABLA2 (
+                                P_CODIGO IN NUMBER) AS
+BEGIN
+     execute immediate 'INSERT INTO TABLA2 VALUES ('||P_CODIGO||')';
+END PR_INSERTA_TABLA2;
+/
+
+
+--16
+--Ejecutar desde USUARIO1. ¿Funciona?
+-- Sí, sin ningún problema.
+
+
+--17
+--Ejecutar desde USUARIO2. ¿Funciona?
+-- Sí, sin ningún problema.
+
+
+--18
+/*
+Crear otro procedimiento en USUARIO1:
+CREATE OR REPLACE PROCEDURE PR_CREA_TABLA (
+  P_TABLA IN VARCHAR2, P_ATRIBUTO IN VARCHAR2) AS
+BEGIN
+  EXECUTE IMMEDIATE 'CREATE TABLE '||P_TABLA||'('||P_ATRIBUTO||' NUMBER(9))';
+END PR_CREA_TABLA;
+/
+*/
+CREATE OR REPLACE PROCEDURE USUARIO1.PR_CREA_TABLA (
+  P_TABLA IN VARCHAR2, P_ATRIBUTO IN VARCHAR2) AS
+BEGIN
+  EXECUTE IMMEDIATE 'CREATE TABLE '||P_TABLA||'('||P_ATRIBUTO||' NUMBER(9))';
+END PR_CREA_TABLA;
+/
+
+
+--19
+--Ejecutar desde USUARIO1. ¿Funciona?
+exec pr_crea_tabla('tabla_u1','codigo');
+/* 
+en línea 1:
+1031: privilegios insuficientes
+6512: en "USUARIO1.PR_CREA_TABLA", línea 4
+6512: en línea 1
+*/
+-- NO funciona correctamente porque las instrucciones DDL dentro de un procedimiento requieren tener privilegios concedidos explícitamente (y NO a través de un rol) para poder ser utilizadas.
+
+
+--20
+--Asignemos permisos explícitos (y no a través de un rol como está ahora) de creación de tablas al USUARIO1. Asignar permisos de ejecución sobre el procedimiento anterior al USUARIO2.
+grant create table to usuario1;
+grant execute on usuario1.pr_crea_tabla to usuario2; 
+
+
+--21
+--Ejecutar desde USUARIO2. �Funciona?
+exec usuario1.pr_crea_tabla('tabla_u2','codigo');
+-- Sí, aunque éste no tiene permiso de SELECT sobre la misma.
+-- Una vez que el usuario1 tiene privilegios explícitos (y no procedentes de un rol) para crear tablas (o cualquier otra sentencia ddl), cualquier con privilegios de ejecución en
+-- su procedimiento, podrá crear tablas en sus esquema como si fuera el usuario1.
+
+
+--22
+--Vamos ahora a comprobar como está la instalación de ORACLE que tenemos delante. En primer lugar, en una configuración óptima deberíamos conocer cuales son las cuentas que aún tienen su password por defecto (lo cual es una mala práctica desde el punto de vista de seguridad. Consulta para ello la vista de diccionario DBA_USERS_WITH_DEFPWD. Ahora, responde: ¿por qué hay tantas cuentas? ¿tan insegura es ORACLE tras la instalación? PISTA: Utiliza esa vista en combinación con otra que te permita estudiarlo.
+SELECT * FROM DBA_USERS_WITH_DEFPWD;
+SELECT * FROM SYS.DBA_USERS;
+SELECT
+    *
+FROM
+    dba_users du,
+    dba_users_with_defpwd dv,
+    sys.dba_role_privs rv
+WHERE
+    du.username = dv.username
+    AND   rv.grantee = dv.username
+    AND   rv.granted_role = 'CONNECT'
+    AND   du.account_status = 'OPEN';
+
+    
+--23
+--Sabemos que existe un profile por defecto para la creación usuarios. Vamos a modificarlo de manera que todos los usuarios cumplan una política mínima para la gestión de contraseñas al ser creados. 
+--En primer lugar consulta cuales son los parámetros existentes del profile por defecto (la vista DBA_PROFILES puede ayudarte). ¿Cuáles son?
+SELECT RESOURCE_NAME FROM SYS.DBA_PROFILES WHERE PROFILE='DEFAULT';
+
+--Cambia el número de logins fallidos A 4 y el tiempo de gracia a 5
+ALTER PROFILE DEFAULT LIMIT FAILED_LOGIN_ATTEMPTS 4 PASSWORD_GRACE_TIME 5;
+
+--Con el usuario1 haz 4 logins fallidos. ¿Qué ocurre la cuarta vez?
+--La cuenta se bloquea.
+
+--Desbloquea la cuenta (alter user...)
+alter user usuario1 account unlock;
+ 
+--A pesar de que hayamos cambiado el parámetro de failed_login_attempts, si consultamos el parámetro de inicialización sec_max_failed_login_attempts (show parameter...) aparece un valor diferente. Significan por tanto diferentes cosas. Para quå es útil cada uno?
+show parameter sec_max_failed_login_attempts;
+-- En este caso se trata del cliente y no del usuario. Es decir, si intentamos 4 logins infructuosos aunque sea con diferentes usuarios, el cliente es cerrado.
+
+--Investiga si existe un forma de "quitar" los perfiles que hemos creado al principio. ¿Se puede hacer con todos los perfiles de oracle?
+select * from SYS.DBA_PROFILES;
+drop profile perf_administrativo cascade; 
+drop profile perf_empleado;
+-- No, el profile DEFAULT no puede borrarse
+
+--Una última pregunta. Algunos parámetros de inicialización son dinámicos, y otros estáticos, como hablamos en clase. ¿Cual es la diferencia entre ellos?
+--Básicamente que aquellos que son estáticos precisan de un reinicio de la base de datos (shutdown/start) para que sean efectivos, mientras que los dinámicos no.
