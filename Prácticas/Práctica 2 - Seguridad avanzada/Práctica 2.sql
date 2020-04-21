@@ -2,9 +2,9 @@
 ALTER SYSTEM SET "WALLET_ROOT"='C:\Users\app\alumnos\Oracle_instalacion\wallet'
     SCOPE=SPFILE;
 
-    -- No se usï¿½ la ruta C:\Users\Usuario_UMA\Oracle\wallet porque el usuario
-    -- no tiene permisos de escritura en ella, asï¿½ que la sentencia no funciona
-    -- correctamente. Sobre la nueva ruta sï¿½ se tienen dichos permisos.
+    -- No se usó la ruta 'C:\Users\Usuario_UMA\Oracle\wallet' porque el usuario
+    -- no tiene permisos de escritura en ella, así que la sentencia no funciona
+    -- correctamente. Sobre la nueva ruta sí se tienen dichos permisos.
 
 ALTER SYSTEM SET TDE_CONFIGURATION="KEYSTORE_CONFIGURATION=FILE"
     SCOPE=BOTH;
@@ -43,7 +43,7 @@ CREATE OR REPLACE
         BEGIN
             IF (SYS_CONTEXT('USERENV', 'ISDBA')='TRUE')
                 THEN RETURN '';
-                -- Si el usuario se conecta como sysdba, podrï¿½ ver toda la tabla.
+                -- Si el usuario se conecta como sysdba, podría ver toda la tabla.
 
             ELSE
                 usu := SYS_CONTEXT('userenv', 'SESSION_USER');
@@ -53,8 +53,8 @@ CREATE OR REPLACE
         END;
 /
 
-    -- userenv  = Contexto de aplicaciï¿½n.
-    -- p_obj    = Nombre de la tabla o vista al cual se le aplicarï¿½ la polï¿½tica.
+    -- userenv  = Contexto de aplicación.
+    -- p_obj    = Nombre de la tabla o vista al cual se le aplicaría la política.
     -- p_schema = Esquema en el que se encuentra dicha tabla / vista.
 
 
@@ -88,14 +88,14 @@ GRANT SELECT, UPDATE
 
 
 -- Paso #12
-    -- Solo aparece la informaciï¿½n del mismo usuario que hace la consulta.
+    -- Solo aparece la información del mismo usuario que hace la consulta.
 
 
 -- Paso #14
     -- No.
     -- No.
     -- No puedo.
-    -- Sï¿½.
+    -- Sí.
 
 
 -- Paso #16
