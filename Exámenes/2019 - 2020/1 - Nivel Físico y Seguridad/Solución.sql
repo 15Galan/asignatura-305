@@ -18,8 +18,6 @@ CREATE TABLE MODELO (
     TABLESPACE TS_ALUMNOS
     PCTFREE 15;
 
-ALTER TABLE MODELO(
-
 
 -- Ejercicio 3 (desde el usuario para el examen)
     -- Claves primarias asignadas en los ejercicios 1 y 2.
