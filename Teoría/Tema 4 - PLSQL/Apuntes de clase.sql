@@ -1,16 +1,18 @@
--- Función que almacena en 'variable' un nombre de la 'tabla'
+-- Función que almacena en 'variable' el nombre de una 'tabla'
 -- que cumplan la condición.
 DECLARE
   variable VARCHAR2(200);
 
   BEGIN
-    SELECT nombre INTO variable
-      FROM tabla
+    SELECT nombre INTO variable     -- Si la selección devuelve más de una fila que
+      FROM tabla                    -- cumplan la condición, se necesitan cursores
         WHERE condicion;
   END;
 /
 
-  -- Si la selección devuelve más de una fila que cumpla la condición, se necesitan cursores.
+
+
+-- CURSORES
 
 -- Declaración explícita de un cursor (estructura ABRIR-TRAER-CERRAR):
 DECLARE
@@ -23,7 +25,7 @@ DECLARE
 
   BEGIN
     OPEN cursor;                  -- ABRIR
-    FETCH cursor INTO variable;   -- Esto trata cada fila de un conjunto (TRAER).
+    FETCH cursor INTO variable;   -- Esto trata cada fila de un conjunto (TRAER)
 
     DBMS_OUTPUT.PUT_LINE('La primera línea es '||variable);
 
@@ -47,8 +49,7 @@ DECLARE
   END;
 /
 
-
--- Usar un cursor para actualizar datos (hacer cualquier cosa con una fila):
+-- Usar un cursor para actualizar datos (tratar una fila):
 DECLARE
   variable VARCHAR2(200);
 
@@ -56,12 +57,12 @@ DECLARE
     SELECT nombre INTO variable
       FROM tabla
         WHERE condicion
-          FOR UPDATE OF columna;  -- Si no se especifica la columna, bloquea el resto de procesos.
-                                  -- Si se sabe qué columna modificar, se debe especificar.
+          FOR UPDATE OF columna;  -- Si no se especifica la columna, bloquea el resto de procesos
+                                  -- Si se sabe qué columna modificar, se debe especificar
 
   BEGIN
     OPEN cursor;                  -- ABRIR
-    FETCH cursor INTO variable;   -- Esto trata cada fila de un conjunto (TRAER).
+    FETCH cursor INTO variable;   -- Esto trata cada fila de un conjunto (TRAER)
 
     DBMS_OUTPUT.PUT_LINE('La primera línea es '||variable);
 
@@ -72,8 +73,7 @@ DECLARE
 
 
 -- PAQUETES
--- Un paquete es un conjunto de funciones y/o procedimientos,
--- sirve para organizar
+-- Un paquete es un conjunto de funciones y/o procedimientos, sirve para organizar
 
 -- Cómo crear un paquete de definiciones:
 CREATE OR REPLACE
@@ -85,7 +85,6 @@ CREATE OR REPLACE
       RETURN NUMBER;
 
   END paquete;
-
 
 -- Cómo crear un paquete:
 CREATE OR REPLACE
@@ -104,9 +103,12 @@ CREATE OR REPLACE
 
   END paquete;
 
-
 -- Usar un paquete:
 EXEC paquete.procedimiento(5);    -- Ejecutar un procedimiento
+
+
+
+-- FUNCIÓN
 
 DECLARE                           -- Las funciones deben usarse en un cuerpo,
   resultado NUMBER;               -- para usar el valor de su RETURN
@@ -125,10 +127,10 @@ DECLARE                           -- Las funciones deben usarse en un cuerpo,
       WHEN mi_error
         THEN DBMS_OUTPUT.PUT_LINE('Se ha producido una excepción que yo he creado');
 
-      WHEN others   -- Para cualquier otro caso.
+      WHEN others   -- Para cualquier otro caso
         THEN DBMS_OUTPUT.PUT_LINE('Ni idea de qué ha pasado.');
 
-  END;  -- Si no se trata la excepción, se eleva.
+  END;  -- Si no se trata la excepción, se eleva
 /
 
 
@@ -139,10 +141,8 @@ DECLARE
   BEGIN
     tabla := 'EMPLEADOS';
 
-    EXECUTE IMMEDIATE   -- Necesario si se usa una sentencia DDL dentro de PL/SQL
-                        -- o si se usa una sentencia DML con objetos desconocidos
-                        -- cuando se quiera ejecutar
-      'INSERT INTO '||tabla||' VALUES (121562, ''Galán'');';
-
+    EXECUTE IMMEDIATE                                           -- Necesario si se usa una sentencia DDL dentro de PL/SQL
+      'INSERT INTO '||tabla||' VALUES (121562, ''Galán'');';    -- o si se usa una sentencia DML con objetos desconocidos
+                                                                -- cuando se quiera ejecutar
     COMMIT;
   END;
