@@ -183,19 +183,18 @@ BEGIN
             job_type => 'PLSQL_BLOCK',
             job_action =>
                 'BEGIN
-                    EXECUTE IMMEDIATE
-                        ''TRUNCATE mensajes_borrados;'';
+                    TRUNCATE TABLE mensajes_borrados;
                 END;',
-                    
+                
             number_of_arguments => 0,
-            start_date => NULL,
-            repeat_interval => 'FREQ=MINUTELY;INTERVAL=2;BYDAY=MON,TUE,WED,THU,FRI,SAT,SUN',
+            start_date => TO_TIMESTAMP_TZ('2020-04-30 16:30:36.000000000 EUROPE/PARIS','YYYY-MM-DD HH24:MI:SS.FF TZR'),
+            repeat_interval => 'FREQ=MINUTELY;BYDAY=MON,TUE,WED,THU,FRI,SAT,SUN',
             end_date => NULL,
             enabled => FALSE,
             auto_drop => FALSE,
-            comments => 'Elimina las filas de la tabla MENSAJES_BORRADOS cada 2 min.');
-
-
+            comments => 'Vacía la tabla MENSAJES_BORRADOS cada 2 min');
+            
+ 
     DBMS_SCHEDULER.SET_ATTRIBUTE( 
              name => '"UBD689"."BORRAR_MENSAJES_BORRADOS"', 
              attribute => 'store_output', value => TRUE);
@@ -203,13 +202,13 @@ BEGIN
              name => '"UBD689"."BORRAR_MENSAJES_BORRADOS"', 
              attribute => 'logging_level', value => DBMS_SCHEDULER.LOGGING_OFF);
       
-
+    
     DBMS_SCHEDULER.enable(
              name => '"UBD689"."BORRAR_MENSAJES_BORRADOS"');
 END;
+/
 
     -- Esta vista permite ver información sobre la ejecución de los trabajos:
     SELECT *
         FROM dba_scheduler_job_run_details
-            WHERE owner LIKE user;          -- Mostrará solo los trabajos de este usuario
-
+            WHERE owner LIKE user;          -- Solo los trabajos de este usuario
