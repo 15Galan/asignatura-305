@@ -14,17 +14,17 @@ CREATE OR REPLACE
     TRIGGER audita_mensajes         -- Dejará de funcionar en el siguiente ejercicio
         AFTER INSERT OR UPDATE      -- ya que se le añaden columnas a la tabla 'mensajes'
             ON mensajes
-                BEGIN                    
-                    IF INSERTING THEN
-                        INSERT INTO audita_mensajes
-                            VALUES (user, 'INSERT', sysdate);
-                    
-                    ELSIF UPDATING THEN
-                        INSERT INTO audita_mensajes
-                            VALUES (user, 'UPDATING', sysdate);
-                    END IF;
-                    
-                END audita_mensajes;
+        BEGIN                    
+            IF INSERTING THEN
+                INSERT INTO audita_mensajes
+                    VALUES (user, 'INSERT', sysdate);
+            
+            ELSIF UPDATING THEN
+                INSERT INTO audita_mensajes
+                    VALUES (user, 'UPDATING', sysdate);
+            END IF;
+            
+        END audita_mensajes;
 /
 
 
@@ -76,34 +76,34 @@ CREATE OR REPLACE
     TRIGGER audita_mensajes_info
         AFTER INSERT OR UPDATE OR DELETE
             ON mensajes FOR EACH ROW
-                BEGIN
-                    IF INSERTING THEN
-                        UPDATE mensajes_info
-                            SET cuantos_mensajes = cuantos_mensajes + 1,
-                                ultimo = :new.texto
-                                WHERE tipo = :new.tipo;
+        BEGIN
+            IF INSERTING THEN
+                UPDATE mensajes_info
+                    SET cuantos_mensajes = cuantos_mensajes + 1,
+                        ultimo = :new.texto
+                        WHERE tipo = :new.tipo;
 
-                    ELSIF UPDATING THEN
-                        IF :new.tipo != :old.tipo THEN
-                            UPDATE mensajes_info
-                                SET cuantos_mensajes = cuantos_mensajes + 1,
-                                    ultimo = :new.texto
-                                    WHERE tipo = :new.tipo;
-                            
-                            UPDATE mensajes_info
-                                SET cuantos_mensajes = cuantos_mensajes - 1,
-                                    ultimo = null
-                                    WHERE tipo = :old.tipo;
-                        END IF;
+            ELSIF UPDATING THEN
+                IF :new.tipo != :old.tipo THEN
+                    UPDATE mensajes_info
+                        SET cuantos_mensajes = cuantos_mensajes + 1,
+                            ultimo = :new.texto
+                            WHERE tipo = :new.tipo;
+                    
+                    UPDATE mensajes_info
+                        SET cuantos_mensajes = cuantos_mensajes - 1,
+                            ultimo = null
+                            WHERE tipo = :old.tipo;
+                END IF;
 
-                    ELSIF DELETING THEN
-                        UPDATE mensajes_info
-                            SET cuantos_mensajes = cuantos_mensajes - 1,
-                                ultimo = null
-                                WHERE tipo = :old.tipo;
+            ELSIF DELETING THEN
+                UPDATE mensajes_info
+                    SET cuantos_mensajes = cuantos_mensajes - 1,
+                        ultimo = null
+                        WHERE tipo = :old.tipo;
 
-                    END IF;
-                END audita_mensajes_info;
+            END IF;
+        END audita_mensajes_info;
 /
 
 
@@ -142,14 +142,14 @@ CREATE OR REPLACE
     TRIGGER insertar_mensajes
         INSTEAD OF INSERT
             ON mensajes
-                BEGIN
-                    INSERT INTO mensajes_texto
-                        VALUES (:new.codigo, :new.texto);
-                    
-                    INSERT INTO mensajes_tipo
-                        VALUES (:new.codigo, :new.tipo);
-                        
-                END insertar_mensajes;
+        BEGIN
+            INSERT INTO mensajes_texto
+                VALUES (:new.codigo, :new.texto);
+            
+            INSERT INTO mensajes_tipo
+                VALUES (:new.codigo, :new.tipo);
+                
+        END insertar_mensajes;
 /
 
     -- Volviendo a ejecutar el INSERT anterior, la vista se actualiza correctamente
@@ -164,11 +164,11 @@ CREATE OR REPLACE
     TRIGGER borrar_mensajes
         BEFORE DELETE
             ON mensajes_texto FOR EACH ROW
-                BEGIN
-                    INSERT INTO mensajes_borrados
-                        VALUES (:old.codigo, :old.texto);
-                        
-                END borrar_mensajes;
+        BEGIN
+            INSERT INTO mensajes_borrados
+                VALUES (:old.codigo, :old.texto);
+                
+        END borrar_mensajes;
 /
 
 
@@ -212,3 +212,33 @@ END;
     SELECT *
         FROM dba_scheduler_job_run_details
             WHERE owner LIKE user;          -- Solo los trabajos de este usuario
+
+
+-- Ejercicio 6 (tomado del trabajo en grupo)
+CREATE OR REPLACE
+    TRIGGER eliminar_cliente_fidelizado
+        BEFORE DELETE
+            ON cliente FOR EACH ROW
+        BEGIN
+            DELETE FROM fidelizacion
+                WHERE cliente = :old.idcliente;
+                
+            DELETE FROM vehiculo
+                WHERE cliente_idcliente = :old.idcliente;
+        END eliminar_cliente_fidelizado;
+/
+
+
+-- Ejercicio 7 (tomado del trabajo en grupo)
+BEGIN
+    DBMS_SCHEDULER.CREATE_JOB (
+        job_name => 'Llamada_A_Recompensas',
+        job_type => 'PLSQL_BLOCK',
+        job_action => 'BEGIN PROCEDURE P_Recompensa END;',
+        start_date => TO_DATE('2020-12-31 23:55:00' , 'YYYY-MM-DD HH24:MI:SS'),
+        repeat_interval => 'FREQ=YEARLY; INTERVAL=1',
+        enabled => TRUE,
+        comments => 'Llama al procedimiento P_Recompensa anualmente el 31 de Diciembre a las 23.55');
+
+END;
+/
