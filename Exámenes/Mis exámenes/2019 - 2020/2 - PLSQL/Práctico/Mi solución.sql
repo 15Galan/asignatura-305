@@ -90,12 +90,12 @@ CREATE OR REPLACE
             resultado NUMBER;   -- Necesaria, para almacenar y comparar el valor pedido
 
             /* Investigando como sacar el numero de columnas
-                -- �Que vistas del diccionario da informacion sobre columnas?
+                -- Que vistas del diccionario da informacion sobre columnas?
                 SELECT *
                     FROM DICT
                         WHERE comments LIKE '%COLUMNS%';
 
-                -- �Devuelve la cantidad de columnas de la tabla CLIENTE (por ejemplo)?
+                -- Devuelve la cantidad de columnas de la tabla CLIENTE (por ejemplo)?
                 SELECT COUNT(*)
                     FROM cols
                         WHERE table_name = 'CLIENTE';
