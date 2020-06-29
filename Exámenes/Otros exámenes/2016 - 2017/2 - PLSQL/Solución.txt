@@ -1,0 +1,49 @@
+--procedimiento
+
+create or replace procedure PR_CREA_VISTAS_RESPUESTAS as
+
+cursor c_usuarios is select * from usuarios;
+err_msg varchar2(100);
+sentencia varchar2(1000);
+begin
+    
+    for var_c in c_usuarios loop
+        sentencia := 'CREATE OR REPLACE VIEW V_'|| var_c.nombre ||'_RESPUESTA AS SELECT p.Id, p.Enunciado, r.Respuesta from preguntas p left outer join respuestas r on r.id_pregunta = p.id where r.id_usuario ='||var_c.id;
+        dbms_output.put_line(sentencia);
+        begin
+            execute immediate sentencia;
+        exception
+            when others then
+                err_msg := substr(sqlerrm, 1, 100);
+                insert into errores values (var_c.usuario_oracle, err_msg);
+        end;
+    end loop;
+end PR_CREA_VISTAS_RESPUESTAS;
+
+--TRIGGER
+
+
+create or replace TRIGGER TR_RESPUESTAS
+INSTEAD OF UPDATE ON V_RESPUESTAS
+FOR EACH ROW
+DECLARE
+    id_usuario number;
+    resp_anterior varchar2(100);
+
+BEGIN
+    select id into id_usuario from usuarios where usuario_oracle = user;
+    begin
+        select r.respuesta into resp_anterior from respuestas r, preguntas p where r.id_pregunta = p.id;
+        update respuestas set respuesta = :new.respuesta where id_pregunta = :old.id_pregunta; 
+
+    exception when no_data_found then
+            --si no hay respuesta
+            
+            insert into respuestas values (sec_respuestas.nextval, :old.id_pregunta, id_usuario, :new.respuesta);
+            
+    end;
+exception
+    when no_data_found then
+        raise_application_error(-20001, 'No se ha encontrado el usuario');
+commit;
+END TR_RESPUESTAS;
